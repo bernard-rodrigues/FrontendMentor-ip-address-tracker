@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react'
+import { useMap } from 'react-leaflet'
 import arrow from '../assets/icon-arrow.svg'
 import { useIPLocation } from '../contexts/IPLocationContext'
 import { api } from '../lib/axios'
@@ -40,13 +41,13 @@ export function Header(){
             })
             return
         }
-        console.log('not ok')
+        alert("Please, inform a valid IPv4 format...")
     }
 
     return(
         <header 
             role="banner" 
-            className="relative bg-myPattern bg-contain lg:bg-cover flex flex-col items-center h-[18.75rem] lg:h-[17.6rem] py-[1.45rem] lg:py-8"
+            className="bg-myPattern bg-contain lg:bg-cover flex flex-col items-center h-[300px] lg:h-[17.6rem] py-[23px] lg:py-8"
         >
             <h1 className="text-white text-[1.6rem] lg:text-3xl font-mySemiBold">IP Address Tracker</h1>
             
@@ -56,11 +57,11 @@ export function Header(){
                     maxLength={15}
                     value={IP}
                     onChange={event => handleIP(event.target.value)}
-                    className={`rounded-l-2xl h-[3.625rem] w-[16.8rem] lg:w-[498px] lg:h[58px] pl-6 text-[1.16rem] font-myLight`}
+                    className={`rounded-l-2xl h-[3.625rem] w-[272px] lg:w-[498px] lg:h-[58px] pl-6 text-[13px] lg:text-[1.16rem] font-myLight`}
+                    placeholder="Search for any IP address or domain"
                 />
                 <button className={`
-                    rounded-r-2xl bg-veryDarkGray hover:brightness-125 h-[3.625rem] w-[3.6rem] flex justify-center items-center
-                    lg:w-[58px] lg:h-[58px]`} type="submit">
+                    rounded-r-2xl bg-veryDarkGray hover:brightness-125 h-[58px] w-[58px] flex justify-center items-center`} type="submit">
                     <img src={arrow} alt="Submit button" />
                 </button>
             </form>
