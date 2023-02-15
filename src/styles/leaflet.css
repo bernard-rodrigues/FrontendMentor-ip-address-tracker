@@ -2,4 +2,5 @@
     width: 100vw;
     height: calc(100vh - 17.6rem);
     z-index: 0;
+    position: relative;
 }

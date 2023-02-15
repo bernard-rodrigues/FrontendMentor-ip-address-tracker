@@ -1,21 +1,22 @@
-import { FormEvent, useState } from 'react'
-import { useMap } from 'react-leaflet'
+import { FormEvent, useEffect, useState } from 'react'
 import arrow from '../assets/icon-arrow.svg'
 import { useIPLocation } from '../contexts/IPLocationContext'
-import { api } from '../lib/axios'
+import { api, ipify } from '../lib/axios'
 import { InfoBoard } from './InfoBoard'
 
 export function Header(){
-    const [ IP, setIP ] = useState('')
+    const [ IP, setIP ] = useState('');
 
-    const { updateIPLocation } = useIPLocation()
+    const [ isLoaded, setIsLoaded ] = useState(false)
+
+    const { updateIPLocation } = useIPLocation();
     
     function handleIP(newIP: string){
         setIP(newIP)
     }
 
-    function IPSubmition(event: FormEvent){
-        event.preventDefault()
+    function IPSubmition(event?: FormEvent){
+        if(event) event.preventDefault()
         
         const IPparts = IP.split('.')
         if(IPparts.filter(number => parseInt(number) >= 0 && parseInt(number) < 256).length === 4){
@@ -43,6 +44,17 @@ export function Header(){
         }
         alert("Please, inform a valid IPv4 format...")
     }
+
+    useEffect(() => {
+        ipify.get('').then(response => {
+            setIP(response.data)
+        })
+        if(isLoaded) IPSubmition()
+    }, [isLoaded])
+
+    useEffect(() => {
+        if(IP) setIsLoaded(true)
+    }, [IP])
 
     return(
         <header 
