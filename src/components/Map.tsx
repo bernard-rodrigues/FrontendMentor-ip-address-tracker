@@ -15,7 +15,7 @@ export function Map(){
     })
 
     return(
-        <main role="main" className="h-[calc(100vh-17.6rem)] w-screen relative">
+        <main className="h-[calc(100vh-17.6rem)] w-screen relative">
             {IPLocation ? <MapContainer 
                 center={[IPLocation.latitude, IPLocation.longitude]} 
                 zoom={13} 

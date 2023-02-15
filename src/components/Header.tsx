@@ -58,7 +58,6 @@ export function Header(){
 
     return(
         <header 
-            role="banner" 
             className="bg-myPattern bg-contain lg:bg-cover flex flex-col items-center h-[300px] lg:h-[17.6rem] py-[23px] lg:py-8"
         >
             <h1 className="text-white text-[1.6rem] lg:text-3xl font-mySemiBold">IP Address Tracker</h1>
